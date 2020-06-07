@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 import axios from "axios";
 
 export default class dashboard extends Component {
@@ -25,8 +26,17 @@ export default class dashboard extends Component {
         console.log(err);
       });
   };
+  onChangeApi = (e) => {
+    e.preventDefault();
+    let value = e.target.value;
+    console.log(value);
+    this.setState({ Value: value });
+  };
 
   render() {
+    if (this.state.Value) {
+      return <Redirect to={`/dogsPage/${this.state.Value}`} />;
+    }
     return (
       <div>
         <div>
@@ -38,13 +48,14 @@ export default class dashboard extends Component {
           <ul className="list-unstyled">
             {this.state.data.map((i) => {
               return (
-                <li>
+                <li key={i}>
                   <hr />
                   <button
                     type="button"
                     className="btn btn-light"
                     value={i}
                     id={i}
+                    onClick={this.onChangeApi}
                   >
                     {i}
                   </button>
