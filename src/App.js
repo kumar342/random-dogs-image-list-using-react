@@ -8,7 +8,7 @@ export default class App extends Component {
     return (
       <BrowserRouter>
         <Switch>
-          <Route path="/Dashboard" component={Dashboard} />
+          <Route exact path="/" component={Dashboard} />
           <Route path="/dogsPage/:dogName" component={DogsPage} />
         </Switch>
       </BrowserRouter>

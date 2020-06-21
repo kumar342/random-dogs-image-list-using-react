@@ -8,10 +8,8 @@ export default class DogsPage extends Component {
 
   componentDidMount = () => {
     let dogName = this.props.match.params.dogName;
+
     let dogsName = dogName.split(" ").reverse().join(" ").replace(" ", "/");
-
-    console.log(dogName.split(" ").reverse().join(" ").replace(" ", "/"));
-
     axios
       .get(`https://dog.ceo/api/breed/${dogsName}/images/random`)
       .then((response) => {

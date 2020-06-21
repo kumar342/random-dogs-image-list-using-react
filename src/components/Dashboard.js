@@ -5,7 +5,7 @@ import axios from "axios";
 export default class dashboard extends Component {
   state = {
     data: [],
-    Value: "",
+    dogName: "",
   };
 
   componentDidMount() {
@@ -16,6 +16,8 @@ export default class dashboard extends Component {
     axios
       .get(`https://dog.ceo/api/breeds/list/all`)
       .then((res) => {
+        console.log(res);
+
         const a = Object.entries(res.data.message)
           .map((k) => (k[1].length ? k[1].map((i) => i + " " + k[0]) : k[0]))
           .flat();
@@ -26,16 +28,15 @@ export default class dashboard extends Component {
         console.log(err);
       });
   };
-  onChangeApi = (e) => {
+  onChangeApi = async (e) => {
     e.preventDefault();
     let value = e.target.value;
-    console.log(value);
-    this.setState({ Value: value });
+    await this.setState({ dogName: value });
   };
 
   render() {
-    if (this.state.Value) {
-      return <Redirect to={`/dogsPage/${this.state.Value}`} />;
+    if (this.state.dogName) {
+      return <Redirect to={`/dogsPage/${this.state.dogName}`} />;
     }
     return (
       <div>
